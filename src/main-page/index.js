@@ -11,7 +11,14 @@ function App() {
   useEffect(() => {
     axios.get("https://api.hackthenorth.com/v3/events")
       .then(response => {
-        setEvents(response.data);
+        let arr = response.data;
+        arr.sort(function compare(first, second) {
+          if (first.start_time < second.start_time)
+            return -1;
+          else 
+            return 1;
+          });
+        setEvents(arr);
       })
   }, [])
 
