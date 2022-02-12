@@ -3,10 +3,8 @@ import { Card, Button, Tabs, Tab } from "react-bootstrap";
 import { useEffect } from "react";
 import { run as runHolder } from 'holderjs/holder';
 import { Holder } from "holderjs";
-import { useNavigate } from "react-router-dom";
 
-const Events = ({ eve, token }) => {
-    const navigate = useNavigate();
+const Event = ({ eve }) => {
     function timeConverter(UNIX_timestamp){
         var a = new Date(UNIX_timestamp);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -24,12 +22,18 @@ const Events = ({ eve, token }) => {
         return time;
     }
     useEffect(() => { runHolder('image-class-name'); });
-    const seeRelated = () => {
-        navigate(`/${eve.id}`)
-    }
+
     return (
         <Card bg='dark' border="light" text='white' style={{ width: '30rem', marginTop: 20 }}>
-            <Card.Body className="font-link">
+            {/* <Card.Img variant="top" src="holder.js/100px270" /> */}
+            {/* <Card.ImgOverlay> */}
+            <Card.Header>
+                <Tabs>
+                    <Tab title="General"></Tab>
+                    <Tab title="Related Events"></Tab>
+                </Tabs>
+            </Card.Header>
+            <Card.Body>
                 <Card.Title>{eve.name}</Card.Title>
                 <Card.Text>
                     {eve.description? eve.description: ""}
@@ -47,13 +51,11 @@ const Events = ({ eve, token }) => {
                         else 
                             return ", " + d.name; })}
                 </Card.Text>
-                {eve.public_url? <Button href={eve.public_url} variant="outline-success">Public URL</Button>: null}
-                {eve.private_url && token? <Button href={eve.private_url} variant="outline-success">Private URL</Button>: null}
-                <Button onClick={seeRelated} variant="outline-success">See related events</Button>
+                <Button variant="primary">Go somewhere</Button>
                 </Card.Body>
             {/* </Card.ImgOverlay> */}
         </Card>
     )
 }
 
-export default Events;
+export default Event;

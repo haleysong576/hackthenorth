@@ -1,33 +1,29 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './main-page.css';
-import Header from "./header";
-import axios from "axios";
+import Cookies from 'universal-cookie';
+// import Header from "./header";
+
 import MainEvents from "./main-events";
-import Event from "../event";
+import Login from "../log-in";
 
 function App() {
-  const [events, setEvents] = useState([]);
+  const [token, setToken] = useState(false);
+  const cookies = new Cookies();
   useEffect(() => {
-    axios.get("https://api.hackthenorth.com/v3/events")
-      .then(response => {
-        let arr = response.data;
-        arr.sort(function compare(first, second) {
-          if (first.start_time < second.start_time)
-            return -1;
-          else 
-            return 1;
-          });
-        setEvents(arr);
-      })
+    if (cookies.get('Auth')) {
+      setToken("true" == cookies.get('Auth'))
+    }
   }, [])
-
   return (
     <Router>
       <div className="container">
-        <Header />
         <Routes>
-          <Route path="/" element={<MainEvents events={events}></MainEvents>}>
+          <Route path="/login" element={<Login setToken={setToken}/>}>
+          </Route>
+          <Route path="/:eventId" element={<MainEvents token={token} setToken={setToken}></MainEvents> }>
+          </Route>
+          <Route path="/" element={<MainEvents token={token} setToken={setToken}></MainEvents> }>
           </Route>
         </Routes>
       </div>
