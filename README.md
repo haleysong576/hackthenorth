@@ -27,8 +27,7 @@ then try
 
 This is an issue with ESLint that they haven't fixed. I got this error when I switched to a different laptop to work on the project but got fixed by running the above command. 
 
-Thank you for your time, and I hope to hear back from you soon : ) Also, I would appreciate any feedback that you have from this website. There’s always room for improvement. 
-
+Thank you for your time, and I hope to hear back from you soon : ) Also, I would appreciate any feedback that you have from this website. 
 
 # Getting Started with Create React App
 
