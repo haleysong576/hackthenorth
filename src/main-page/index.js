@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './main-page.css';
 import Cookies from 'universal-cookie';
-// import Header from "./header";
-
 import MainEvents from "./main-events";
 import Login from "../log-in";
+import RelatedEvents from "./related-event";
+import Account from "../account";
 
 function App() {
   const [token, setToken] = useState(false);
@@ -21,7 +21,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login setToken={setToken}/>}>
           </Route>
-          <Route path="/:eventId" element={<MainEvents token={token} setToken={setToken}></MainEvents> }>
+          <Route path="/create" element={<Account setToken={setToken}/>}>
+          </Route>
+          <Route path="/:eventId" element={<RelatedEvents token={token} setToken={setToken}></RelatedEvents> }>
           </Route>
           <Route path="/" element={<MainEvents token={token} setToken={setToken}></MainEvents> }>
           </Route>

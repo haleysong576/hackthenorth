@@ -1,3 +1,8 @@
 .font-link {
     font-family: 'Nunito', sans-serif;
 }
+
+.card-container { 
+    width: 30rem;
+    margin-top: 20px;
+}

@@ -1,25 +1,23 @@
-.uspw {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-}
-
 .container {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: '30px';
     flex-direction: column;
 }
 
-.log-in {
+.title {
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
 }
 
 .account-button {
-    display: flex; 
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    display: flex;
     justify-content: center;
     align-content: baseline;
 }

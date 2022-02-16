@@ -1,8 +1,5 @@
 import "./event.css";
-import { Card, Button, Tabs, Tab } from "react-bootstrap";
-import { useEffect } from "react";
-import { run as runHolder } from 'holderjs/holder';
-import { Holder } from "holderjs";
+import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Events = ({ eve, token }) => {
@@ -23,12 +20,11 @@ const Events = ({ eve, token }) => {
         var time = month + ' ' + date + ', ' + year + ' at ' + hour + ':' + minutes;
         return time;
     }
-    useEffect(() => { runHolder('image-class-name'); });
     const seeRelated = () => {
         navigate(`/${eve.id}`)
     }
     return (
-        <Card bg='dark' border="light" text='white' style={{ width: '30rem', marginTop: 20 }}>
+        <Card bg='dark' border="light" text='white' className="card-container">
             <Card.Body className="font-link">
                 <Card.Title>{eve.name}</Card.Title>
                 <Card.Text>
@@ -51,7 +47,6 @@ const Events = ({ eve, token }) => {
                 {eve.private_url && token? <Button href={eve.private_url} variant="outline-success">Private URL</Button>: null}
                 <Button onClick={seeRelated} variant="outline-success">See related events</Button>
                 </Card.Body>
-            {/* </Card.ImgOverlay> */}
         </Card>
     )
 }

@@ -1,38 +1,45 @@
-import logo from "./GloboLogo.png";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import Cookies from 'universal-cookie';
+import './main-page.css';
 
 const Header = ({token, setToken}) => {
+    const cookies = new Cookies();
     const navigate = useNavigate();
     const onSubmit = () => {
         navigate('/login');
     };
     const logout = () => {
         setToken(false);
-        this.setState({});
+        cookies.set('Auth', false);
+        console.log(cookies.get('Auth'));
     };
+    const homeClick = () => {
+        navigate('/');
+    }
     return (
-        <header className="row">
-            <div className="col-md-5">
-                <img src={logo} className="logo" alt="logo"/>
-            </div>
-            <div className="col-md-7 mt-5 subtitle">
-                The biggest hackathon in Canada for 19 years
-            </div>
-            {!token? <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                <button
-                    className="btn btn-primary mt-2"
+        <div className="authButton">
+             <Button 
+                variant="success"
+                onClick={homeClick}
+            >
+                Home
+            </Button>
+            {!token? 
+           
+                <Button
+                    variant="success"
                     onClick={onSubmit}
                 >
                     Login
-                </button>
-            </div>: <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                <button
-                    className="btn btn-primary mt-2"
+                </Button> : 
+                <Button
+                    variant="success"
                     onClick={logout}
                 >
                     Logout
-                </button></div>}
-        </header>
+                </Button>}
+        </div>
     );
     
     };

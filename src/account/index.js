@@ -1,10 +1,9 @@
-import "./log-in.css";
+import "./account.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import { Button } from "react-bootstrap";
 
-const Login = ({setToken}) => {
+const Account = ({setToken}) => {
     const navigate = useNavigate();
     const cookies = new Cookies();
     const [info, setInfo] = useState({
@@ -14,31 +13,21 @@ const Login = ({setToken}) => {
     const onChange = (e) => {
         setInfo({ ...info, [e.target.id]: [e.target.value]});
     }
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log(info);
-        if (info.username == 'test' && info.password == 'test') {
-            setToken(true);
-            cookies.set('Auth', true);
-            navigate(-1);
-        }
-        else {
-            setToken(false);
-        }
+    const onSubmit = () => {
+        setToken(true);
+        cookies.set('Auth', true);
+        navigate('/');
         
       };
-    const createAccount = () => {
-        navigate('/create');
-    }
     return (
     
     <div className="container">
-        <div className="log-in">
-            <h2>Log in</h2>
+        <div className="title">
+            <h2>Create an account</h2>
         </div>
         <form className="mt-2">
-            <div className="form-group" style={{display: 'flex', justifyContent: 'center', alignContent: 'baseline'}}>
-                <label htmlFor="username" style={{marginRight: '20px'}}>Username</label>
+            <div className="form">
+                <label htmlFor="username" style={{marginRight: '20px'}}>New Username</label>
                 <input
                 style={{width: '300px', marginBottom: '20px'}}
                 type="text"
@@ -49,8 +38,8 @@ const Login = ({setToken}) => {
                 onChange={onChange}
                 />
             </div>
-            <div className="form-group" style={{display: 'flex', justifyContent: 'center', alignContent: 'baseline'}}>
-                <label htmlFor="password" style={{marginRight: '20px'}}>Password</label>
+            <div className="form">
+                <label htmlFor="password" style={{marginRight: '20px'}}>New Password</label>
                 <input
                 style={{width: '300px', marginBottom: '30px'}}
                 type="password"
@@ -62,15 +51,12 @@ const Login = ({setToken}) => {
                 />
             </div>
             <div className="account-button">
-                <Button onClick={createAccount} variant="link">Don't have an account? Create one</Button>
-            </div>
-            <div className="log-in">
                 <button
                     className="btn btn-primary mt-2"
                     disabled={!info.username || !info.password}
                     onClick={onSubmit}
                 >
-                    Login
+                    Create Account
                 </button>
             </div>
             
@@ -80,4 +66,4 @@ const Login = ({setToken}) => {
     )
 }
 
-export default Login;
+export default Account;
