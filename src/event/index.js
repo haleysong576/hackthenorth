@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const Events = ({ eve, token }) => {
     const navigate = useNavigate();
+
+    // function to convert unix timestamp into time that people can easily recognize (calendar time)
     function timeConverter(UNIX_timestamp){
         var a = new Date(UNIX_timestamp);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -20,9 +22,12 @@ const Events = ({ eve, token }) => {
         var time = month + ' ' + date + ', ' + year + ' at ' + hour + ':' + minutes;
         return time;
     }
+
+    // use new url to view related events
     const seeRelated = () => {
         navigate(`/${eve.id}`)
     }
+    
     return (
         <Card bg='dark' border="light" text='white' className="card-container">
             <Card.Body className="font-link">

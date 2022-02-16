@@ -13,6 +13,8 @@ const MainEvents = ({ token, setToken})  => {
     const [dataType, setdataType] = useState(cookies.get("dataType")? cookies.get("dataType"): "All");
     let extra = " Please log in if you want the access to private events.";
     let types = ["All"];
+
+    // retrieve data from the endpoint
     useEffect(() => {
         axios.get("https://api.hackthenorth.com/v3/events")
           .then(response => {
@@ -27,6 +29,8 @@ const MainEvents = ({ token, setToken})  => {
           })
           
       }, [])
+
+    // filter data depending on the private / public data and the type of the event
     const filter = () => {
         let data = events.map((d) => { 
             if (((d.permission == "private" && token) || d.permission == "public") &&(dataType == "All" || dataType == d.event_type)) {
@@ -38,6 +42,7 @@ const MainEvents = ({ token, setToken})  => {
         
     }
 
+    // if there is data to show, display, and if not display a message
     if (events){ 
         events.map(d => {if (!types.includes(d.event_type)) types.push(d.event_type)})
         return (

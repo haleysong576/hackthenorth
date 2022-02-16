@@ -7,6 +7,8 @@ import './main-page.css';
 const Filter = ({ dataType, setdataType, types }) => {
     const [type, setType] = useState(dataType); 
     const cookies = new Cookies();
+    
+    // filter the event types
     const handleSelect = (e) => {
         setType(e);
         setdataType(e);

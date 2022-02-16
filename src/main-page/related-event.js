@@ -4,19 +4,17 @@ import { useNavigate, useParams,  } from "react-router-dom";
 import axios from "axios";
 import Filter from "./filter";
 import Cookies from 'universal-cookie';
-import { Button } from "react-bootstrap";
-
-import logo from "./GloboLogo.png";
-import clipArt from "./hackathonArt.png"
 import Header from "./header";
+
 const RelatedEvents = ({ token, setToken})  => {
     const cookies = new Cookies();
     const [events, setEvents] = useState([]);
     const [dataType, setdataType] = useState(cookies.get("dataType")? cookies.get("dataType"): "All");
-    const navigate = useNavigate();
     const { eventId } = useParams();
     let extra;
     let types = ["All"];
+
+    // retrieve data from the end point
     useEffect(() => {
         axios.get("https://api.hackthenorth.com/v3/events")
           .then(response => {
@@ -26,18 +24,8 @@ const RelatedEvents = ({ token, setToken})  => {
           
       }, [])
 
-    const onSubmit = () => {
-        navigate('/login');
-    };
-    const logout = () => {
-        setToken(false);
-        cookies.set('Auth', false);
-    };
-    const homeClick = () => {
-        navigate('/');
-    }
+    // filter out the related data 
     const filter = () => {
-       
         let inx = eventId - 1;
         if (events[inx].permission == "private" && !token)
             return <h2>Requested event is private. Please log in if you want to see its related events.</h2>
@@ -54,10 +42,13 @@ const RelatedEvents = ({ token, setToken})  => {
             return <h2 className="subtitle">No related events at this time</h2>
         
     }
+
+    // If there is data, then show "related events ..."
     if (eventId && events[eventId - 1]) {
         extra = <div><h4 className="subtitle">Related events to: {events[eventId - 1].name}</h4></div>;
     }
 
+    // if there is data to show, display, and if not display a message
     if (events){ 
         events.map(d => {if (!types.includes(d.event_type)) types.push(d.event_type)})
         return (

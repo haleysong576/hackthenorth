@@ -14,6 +14,8 @@ const Login = ({setToken}) => {
     const onChange = (e) => {
         setInfo({ ...info, [e.target.id]: [e.target.value]});
     }
+
+    // if the username and pw are "test" then authorization succeeded, save this in cookies.
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(info);
@@ -27,6 +29,8 @@ const Login = ({setToken}) => {
         }
         
       };
+
+    // navigate to create account page if user click on the creat new account button
     const createAccount = () => {
         navigate('/create');
     }
