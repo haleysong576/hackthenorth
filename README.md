@@ -17,6 +17,7 @@ Any other thoughts you have (not limited to the previous questions).
 
 I added the filtering by event type functionality in my code which you can see from the dropdown menu beside "Filter by:" section in the main page. 
 I also added a create a new account page from the log in screen.
+My code is extensible and scalable since none of the data was hard coded. Even if you add more data, my code will be able to display everything and filter accordingly.
 In addition, there are different messages in the main page or the related events page depending on the authentication status. If you're not logged in, you will be encouraged to log in to view private events. However, if you're logged in you will not see those messages. 
 One more aspect of my code that I would like to highlight is the use of cookies. I used cookies to save user preferences for filtering and the log in authentication status, so that users would not have to go back to the unauthenticated, general page if they click refresh. This will increase the quality of the user experience since they don’t have to continuously input the same information again. 
 
